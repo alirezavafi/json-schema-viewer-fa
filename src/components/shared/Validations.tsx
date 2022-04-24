@@ -36,12 +36,12 @@ const excludedValidations = ['exclusiveMinimum', 'exclusiveMaximum', 'readOnly',
 const numberValidationFormatters: Record<string, (value: unknown) => string> = {
   minimum: value => `>= ${value}`,
   exclusiveMinimum: value => `> ${value}`,
-  minItems: value => `>= ${value} items`,
-  minLength: value => `>= ${value} characters`,
+  minItems: value => `>= ${value} آیتم`,
+  minLength: value => `>= ${value} کاراکتر`,
   maximum: value => `<= ${value}`,
   exclusiveMaximum: value => `< ${value}`,
-  maxItems: value => `<= ${value} items`,
-  maxLength: value => `<= ${value} characters`,
+  maxItems: value => `<= ${value} آیتم`,
+  maxLength: value => `<= ${value} کاراکتر`,
 };
 
 const createStringFormatter = (nowrap: boolean | undefined) => (value: unknown) => {
@@ -54,7 +54,7 @@ const createValidationsFormatter =
     const values = Array.isArray(value) ? value : [value];
     if (values.length) {
       return {
-        name: options?.exact ? name : values.length > 1 ? `${name}s` : `${name}`,
+        name: options?.exact ? name : values.length > 1 ? `${name}` : `${name}`,
         values: values.map(createStringFormatter(options?.nowrap)),
       };
     }
@@ -62,11 +62,11 @@ const createValidationsFormatter =
   };
 
 const validationFormatters: Record<string, (value: unknown) => ValidationFormat | null> = {
-  enum: createValidationsFormatter('Allowed value', { nowrap: true }),
-  examples: createValidationsFormatter('Example', { nowrap: true }),
-  multipleOf: createValidationsFormatter('Multiple of', { exact: true }),
-  pattern: createValidationsFormatter('Match pattern', { exact: true, nowrap: true }),
-  default: createValidationsFormatter('Default', { exact: true, nowrap: true }),
+  enum: createValidationsFormatter('مقادیر مجاز', { nowrap: true }),
+  examples: createValidationsFormatter('مثال', { nowrap: true }),
+  multipleOf: createValidationsFormatter('ضریب', { exact: true }),
+  pattern: createValidationsFormatter('الگو', { exact: true, nowrap: true }),
+  default: createValidationsFormatter('پیشفرض', { exact: true, nowrap: true }),
   style: createValidationsFormatter('Style', { exact: true, nowrap: true }),
 };
 
@@ -160,7 +160,7 @@ const KeyValueValidations = ({ validations }: { validations: Dictionary<unknown>
 const KeyValueValidation = ({ name, values }: { name: string; values: string[] }) => {
   return (
     <HStack color="muted" spacing={2} alignItems="baseline">
-      <Text>{capitalize(name)}:</Text>
+      <Text>{capitalize(name)}: &nbsp;</Text>
 
       <Flex flexWrap flex={1} style={{ gap: 4 }}>
         {uniq(values).map(value => (

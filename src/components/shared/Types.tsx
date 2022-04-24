@@ -53,7 +53,7 @@ export const Types: React.FunctionComponent<{ schemaNode: SchemaNode }> = ({ sch
       </Box>
       {i < length - 1 && (
         <Box as="span" key={`${i}-sep`} color="muted">
-          {' or '}
+          {' یا '}
         </Box>
       )}
     </React.Fragment>

@@ -74,14 +74,14 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(({ 
     <>
       <Flex
         maxW="full"
-        pl={pl}
+        pr={pl}
         py={2}
         onMouseEnter={(e: any) => {
           e.stopPropagation();
           setHoveredNode(selectedChoice.type);
         }}
       >
-        {!isRootLevel && <Box borderT w={isCollapsible ? 1 : 3} ml={-3} mr={3} mt={2} />}
+        {!isRootLevel && <Box borderT w={isCollapsible ? 1 : 3} mr={-3} ml={3} mt={2} />}
 
         <VStack spacing={1} maxW="full" flex={1} ml={isCollapsible && !isRootLevel ? 2 : undefined}>
           <Flex
@@ -109,7 +109,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(({ 
               {onGoToRef && isReferenceNode(schemaNode) && schemaNode.external ? (
                 <Box
                   as="a"
-                  ml={2}
+                  mr={2}
                   cursor="pointer"
                   color="primary-light"
                   onClick={(e: React.MouseEvent) => {
@@ -118,19 +118,19 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(({ 
                     onGoToRef(schemaNode);
                   }}
                 >
-                  (go to ref)
+                  (ارجاع به ref)
                 </Box>
               ) : null}
 
               {schemaNode.subpath.length > 1 && schemaNode.subpath[0] === 'patternProperties' ? (
-                <Box ml={2} color="muted">
+                <Box mr={2} color="muted">
                   (pattern property)
                 </Box>
               ) : null}
 
               {choices.length > 1 && (
                 <Select
-                  aria-label="Pick a type"
+                  aria-label="انتخاب Type"
                   size="sm"
                   triggerTextPrefix={combiner ? `${COMBINER_NAME_MAP[combiner]}: ` : undefined}
                   options={choices.map((choice, index) => ({

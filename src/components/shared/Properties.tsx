@@ -30,11 +30,11 @@ export const Properties: React.FunctionComponent<IProperties> = ({
   const visibility = showVisibilityValidations ? (
     readOnly ? (
       <Box as="span" ml={2} color="muted">
-        read-only
+        غیرقابل تغییر
       </Box>
     ) : (
       <Box as="span" ml={2} color="muted">
-        write-only
+        قابل تغییر
       </Box>
     )
   ) : null;
@@ -43,13 +43,13 @@ export const Properties: React.FunctionComponent<IProperties> = ({
     <>
       {deprecated ? (
         <Box as="span" ml={2} color="warning">
-          deprecated
+          منقضی
         </Box>
       ) : null}
       {visibility}
       {required && (
         <Box as="span" ml={2} color="warning">
-          required
+          اجباری
         </Box>
       )}
     </>

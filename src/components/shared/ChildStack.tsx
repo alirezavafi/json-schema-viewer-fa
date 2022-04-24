@@ -28,7 +28,7 @@ export const ChildStack = React.memo(
     return (
       <Box
         className={className}
-        ml={ml}
+        mr={ml}
         fontSize="sm"
         borderL={isRootLevel ? undefined : true}
         data-level={currentNestingLevel}

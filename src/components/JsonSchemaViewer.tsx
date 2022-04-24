@@ -139,7 +139,7 @@ const JsonSchemaViewerInner = ({
       pos={maxHeight ? 'relative' : undefined}
       overflowY={maxHeight ? 'auto' : undefined}
       onMouseLeave={onMouseLeave}
-      style={{ maxHeight }}
+      style={{ maxHeight, direction:"rtl" }}
     >
       <PathCrumbs parentCrumbs={parentCrumbs} />
       <TopLevelSchemaRow schemaNode={jsonSchemaTreeRoot.children[0]} />
@@ -151,7 +151,7 @@ const JsonSchemaFallbackComponent = ({ error }: FallbackProps) => {
   return (
     <Box p={4}>
       <Box as="b" color="danger">
-        Error
+        خطا
       </Box>
       {error !== null ? `: ${error.message}` : null}
     </Box>

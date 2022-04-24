@@ -36,7 +36,7 @@ export const TopLevelSchemaRow = ({ schemaNode }: Pick<SchemaRowProps, 'schemaNo
 
         <HStack spacing={3} pb={4}>
           <Menu
-            aria-label="Pick a type"
+            aria-label="انتخاب type"
             closeOnPress
             placement="bottom left"
             items={choices.map((choice, index) => ({
