@@ -115,7 +115,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(
           <>
             <Flex
                 maxW="full"
-                pl={pl}
+                pr={pl}
                 py={2}
                 data-id={originalNodeId}
                 pos="relative"
@@ -151,7 +151,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(
                     {onGoToRef && isReferenceNode(schemaNode) && schemaNode.external ? (
                         <Box
                             as="a"
-                            ml={2}
+                            mr={2}
                             cursor="pointer"
                             color="primary-light"
                             onClick={(e: React.MouseEvent) => {
@@ -160,7 +160,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(
                               onGoToRef(schemaNode);
                             }}
                         >
-                          (go to ref)
+                          (ارجاع به ref)
                         </Box>
                     ) : null}
 
@@ -172,7 +172,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(
 
                     {choices.length > 1 && (
                         <Select
-                            aria-label="Pick a type"
+                            aria-label="انتخاب Type"
                             size="sm"
                             triggerTextPrefix={combiner ? `${COMBINER_NAME_MAP[combiner]}: ` : undefined}
                             options={choices.map((choice, index) => ({
