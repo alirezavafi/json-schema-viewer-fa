@@ -1,4 +1,3 @@
-import { faCaretDown } from '@fortawesome/free-solid-svg-icons/faCaretDown.js';
 import { isRegularNode, RegularNode } from '@stoplight/json-schema-tree';
 import { Box, Flex, HStack, Icon, Menu, Pressable } from '@stoplight/mosaic';
 import { useUpdateAtom } from 'jotai/utils';
@@ -8,21 +7,39 @@ import { COMBINER_NAME_MAP } from '../../consts';
 import { useIsOnScreen } from '../../hooks/useIsOnScreen';
 import { calculateChildrenToShow, isComplexArray } from '../../tree';
 import { showPathCrumbsAtom } from '../PathCrumbs/state';
+import { Description } from '../shared';
 import { ChildStack } from '../shared/ChildStack';
+import { getInternalSchemaError } from '../shared/Validations';
 import { SchemaRow, SchemaRowProps } from './SchemaRow';
 import { useChoices } from './useChoices';
 
-export const TopLevelSchemaRow = ({ schemaNode }: Pick<SchemaRowProps, 'schemaNode'>) => {
+export const TopLevelSchemaRow = ({
+  schemaNode,
+  skipDescription,
+}: Pick<SchemaRowProps, 'schemaNode'> & { skipDescription?: boolean }) => {
   const { selectedChoice, setSelectedChoice, choices } = useChoices(schemaNode);
   const childNodes = React.useMemo(() => calculateChildrenToShow(selectedChoice.type), [selectedChoice.type]);
   const nestingLevel = 0;
+
+  const nodeId = schemaNode.fragment?.['x-stoplight']?.id;
+
+  const internalSchemaError = getInternalSchemaError(schemaNode);
 
   // regular objects are flattened at the top level
   if (isRegularNode(schemaNode) && isPureObjectNode(schemaNode)) {
     return (
       <>
         <ScrollCheck />
-        <ChildStack schemaNode={schemaNode} childNodes={childNodes} currentNestingLevel={nestingLevel} />
+        {!skipDescription ? <Description value={schemaNode.annotations.description} /> : null}
+        <ChildStack
+          schemaNode={schemaNode}
+          childNodes={childNodes}
+          currentNestingLevel={nestingLevel}
+          parentNodeId={nodeId}
+        />
+        {internalSchemaError.hasError && (
+          <Icon title={internalSchemaError.error} color="danger" icon={['fas', 'exclamation-triangle']} size="sm" />
+        )}
       </>
     );
   }
@@ -33,6 +50,7 @@ export const TopLevelSchemaRow = ({ schemaNode }: Pick<SchemaRowProps, 'schemaNo
     return (
       <>
         <ScrollCheck />
+        <Description value={schemaNode.annotations.description} />
 
         <HStack spacing={3} pb={4}>
           <Menu
@@ -49,7 +67,7 @@ export const TopLevelSchemaRow = ({ schemaNode }: Pick<SchemaRowProps, 'schemaNo
                 <Flex fontFamily="mono" fontWeight="semibold" cursor="pointer" fontSize="base">
                   {selectedChoice.title}
                   <Box ml={1}>
-                    <Icon icon={faCaretDown} />
+                    <Icon icon={['fas', 'caret-down']} />
                   </Box>
                 </Flex>
               </Pressable>
@@ -64,7 +82,12 @@ export const TopLevelSchemaRow = ({ schemaNode }: Pick<SchemaRowProps, 'schemaNo
         </HStack>
 
         {childNodes.length > 0 ? (
-          <ChildStack schemaNode={schemaNode} childNodes={childNodes} currentNestingLevel={nestingLevel} />
+          <ChildStack
+            schemaNode={schemaNode}
+            childNodes={childNodes}
+            currentNestingLevel={nestingLevel}
+            parentNodeId={nodeId}
+          />
         ) : null}
       </>
     );
@@ -74,13 +97,19 @@ export const TopLevelSchemaRow = ({ schemaNode }: Pick<SchemaRowProps, 'schemaNo
     return (
       <>
         <ScrollCheck />
+        <Description value={schemaNode.annotations.description} />
 
         <Box fontFamily="mono" fontWeight="semibold" fontSize="base" pb={4}>
           array of:
         </Box>
 
         {childNodes.length > 0 ? (
-          <ChildStack schemaNode={schemaNode} childNodes={childNodes} currentNestingLevel={nestingLevel} />
+          <ChildStack
+            schemaNode={schemaNode}
+            childNodes={childNodes}
+            currentNestingLevel={nestingLevel}
+            parentNodeId={nodeId}
+          />
         ) : null}
       </>
     );
