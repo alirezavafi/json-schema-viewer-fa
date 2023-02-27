@@ -40,7 +40,7 @@ export const Description: React.FunctionComponent<{ value: string }> = ({ value 
         },
       }}
       style={{
-        fontSize: 12,
+        fontSize: 14,
       }}
     />
   );
