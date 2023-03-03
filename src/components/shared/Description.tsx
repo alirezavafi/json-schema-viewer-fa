@@ -32,7 +32,7 @@ export const Description: React.FunctionComponent<{ value: unknown }> = ({ value
           p: (props: any) => {
             return (
               <Box as="p">
-                <Text mr={1}>{props.children}</Text>
+                <Text ml={1}>{props.children}</Text>
                 <Link cursor="pointer" onClick={() => setShowAll(true)}>
                   نمایش همه ...
                 </Link>

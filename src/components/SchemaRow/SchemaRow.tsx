@@ -124,7 +124,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(
                   setHoveredNode(selectedChoice.type);
                 }}
             >
-              {!isRootLevel && <Box borderT w={isCollapsible ? 1 : 3} ml={-3} mr={3} mt={2} />}
+              {!isRootLevel && <Box borderT w={isCollapsible ? 1 : 3} mr={-3} ml={3} mt={2} />}
 
               {parentChangeType !== 'added' && parentChangeType !== 'removed' ? (
                   <NodeAnnotation change={hasChanged} style={{ left: annotationLeftOffset }} />
@@ -141,7 +141,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(
 
                   <Flex alignItems="baseline" fontSize="base">
                     {schemaNode.subpath.length > 0 && shouldShowPropertyName(schemaNode) && (
-                        <Box mr={2} fontFamily="mono" fontWeight="semibold">
+                        <Box ml={2} fontFamily="mono" fontWeight="semibold">
                           {last(schemaNode.subpath)}
                         </Box>
                     )}
@@ -151,7 +151,7 @@ export const SchemaRow: React.FunctionComponent<SchemaRowProps> = React.memo(
                     {onGoToRef && isReferenceNode(schemaNode) && schemaNode.external ? (
                         <Box
                             as="a"
-                            mr={2}
+                            ml={2}
                             cursor="pointer"
                             color="primary-light"
                             onClick={(e: React.MouseEvent) => {

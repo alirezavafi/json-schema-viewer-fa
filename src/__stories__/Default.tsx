@@ -24,7 +24,7 @@ export const CustomRowAddon = Template.bind({});
 CustomRowAddon.args = {
   renderRowAddon: () => (
     <Flex h="full" alignItems="center">
-      <Button pl={1} mr={1} size="sm" appearance="minimal" icon="bullseye" />
+      <Button pr={1} ml={1} size="sm" appearance="minimal" icon="bullseye" />
       <input type="checkbox" />
     </Flex>
   ),

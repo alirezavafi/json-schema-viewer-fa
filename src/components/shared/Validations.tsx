@@ -34,14 +34,14 @@ const exampleValidationNames = ['examples'];
 const excludedValidations = ['exclusiveMinimum', 'exclusiveMaximum', 'readOnly', 'writeOnly'];
 
 const numberValidationFormatters: Record<string, (value: unknown) => string> = {
-  minimum: value => `>= ${value}`,
-  exclusiveMinimum: value => `> ${value}`,
-  minItems: value => `>= ${value} آیتم`,
-  minLength: value => `>= ${value} کاراکتر`,
-  maximum: value => `<= ${value}`,
-  exclusiveMaximum: value => `< ${value}`,
-  maxItems: value => `<= ${value} آیتم`,
-  maxLength: value => `<= ${value} کاراکتر`,
+  minimum: value => `حداقل برابر با ${value}`,
+  exclusiveMinimum: value => `حداقل بزرگتر از ${value}`,
+  minItems: value => `حداقل ${value} آیتم`,
+  minLength: value => `حداقل ${value} کاراکتر`,
+  maximum: value => `حداکثر برابر با ${value}`,
+  exclusiveMaximum: value => `حداقل کوچکتر از ${value}`,
+  maxItems: value => `حداکثر ${value} آیتم`,
+  maxLength: value => `حداکثر ${value} کاراکتر`,
 };
 
 const createStringFormatter = (nowrap: boolean | undefined) => (value: unknown) => {
